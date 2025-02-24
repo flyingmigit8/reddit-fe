@@ -8,6 +8,7 @@ interface Post {  // Define the Post interface
     author: string;
     url?: string; // Optional url
     thumbnail?: string; // Optional thumbnail
+    score: Int16Array;
   };
 }
 
@@ -130,14 +131,17 @@ function App() {
               <button
                 onClick={() => handleFavouriteClick(post.data.id)}
                 className="favourite-button"
-                disabled={isFavourited}>
-                <h2>{post.data.title}</h2>
-                <p>By: {post.data.author}</p>
-                {post.data.url && <a href={post.data.url} target="_blank" rel="noopener noreferrer"><p>Link</p></a>} {/* Conditionally render link if available */}
-                <img src={post.data.thumbnail} alt={""} style={{ maxWidth: "200px" }} onError={(e) => { const target = e.target as HTMLImageElement; target.onerror = null; }} /> {/* Handle thumbnail errors, providing a fallback */}
-                {isFavourited ? "Favourited" : "Save To Favourites"}  {/* Change button text */}
+                disabled={isFavourited}
+              >
+                {isFavourited ? "Favourited" : "Save To Favourites"}  {/* Correct placement */}
               </button>
-              {/* ... other post content ... */}
+              <h2>{post.data.title}</h2>
+              <h2>Score: {post.data.score}</h2>
+              <p>By: {post.data.author}</p>
+              {post.data.url && <a href={post.data.url} target="_blank" rel="noopener noreferrer"><p>Link To Comments</p></a>} {/* Conditionally render link if available */}
+              <img src={post.data.thumbnail} alt={""} style={{ maxWidth: "200px" }} onError={(e) => { const target = e.target as HTMLImageElement; target.onerror = null; }} /> {/* Handle thumbnail errors, providing a fallback */}
+              { }  {/* Change button text */}
+
             </li>
           );
         })}
@@ -151,14 +155,11 @@ function App() {
           <li key={post.data.id} className="post">
             <button onClick={() => handleRemoveFavourite(post.data.id)} className="favourite-button">Remove</button>
             <h2>{post.data.title}</h2>
+            <h2>Score: {post.data.score}</h2>
             <p>By: {post.data.author}</p>
-            {post.data.url && (
-              <a href={post.data.url} target="_blank" rel="noopener noreferrer">
-                <p>Link</p>
-              </a>
-            )}
-            {/* Conditionally render the image */}
-            {post.data.thumbnail && <img src={post.data.thumbnail} alt={post.data.title} style={{ maxWidth: '200px' }} onError={(e) => { const target = e.target as HTMLImageElement; target.onerror = null; }} />}
+            {post.data.url && <a href={post.data.url} target="_blank" rel="noopener noreferrer"><p>Link To Comments</p></a>} {/* Conditionally render link if available */}
+
+            <img src={post.data.thumbnail} alt={""} style={{ maxWidth: "200px" }} onError={(e) => { const target = e.target as HTMLImageElement; target.onerror = null; }} /> {/* Handle thumbnail errors, providing a fallback */}
           </li>
         ))}
       </ul>
