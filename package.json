@@ -1,5 +1,6 @@
 {
   "name": "reddit-favourites-app",
+  "homepage": "https://flyingmigit8.github.io/reddit-fe",
   "private": true,
   "version": "0.0.0",
   "type": "module",

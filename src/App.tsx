@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 interface Post {  // Define the Post interface
@@ -136,7 +134,7 @@ function App() {
                 <h2>{post.data.title}</h2>
                 <p>By: {post.data.author}</p>
                 {post.data.url && <a href={post.data.url} target="_blank" rel="noopener noreferrer"><p>Link</p></a>} {/* Conditionally render link if available */}
-                <img src={post.data.thumbnail} alt={""} style={{ maxWidth: "200px" }} onError={(e) => { e.target.onerror = null; }} /> {/* Handle thumbnail errors, providing a fallback */}
+                <img src={post.data.thumbnail} alt={""} style={{ maxWidth: "200px" }} onError={(e) => { const target = e.target as HTMLImageElement; target.onerror = null; }} /> {/* Handle thumbnail errors, providing a fallback */}
                 {isFavourited ? "Favourited" : "Save To Favourites"}  {/* Change button text */}
               </button>
               {/* ... other post content ... */}
@@ -160,7 +158,7 @@ function App() {
               </a>
             )}
             {/* Conditionally render the image */}
-            {post.data.thumbnail && <img src={post.data.thumbnail} alt={post.data.title} style={{ maxWidth: '200px' }} onError={(e) => { e.target.onerror = null; }} />}
+            {post.data.thumbnail && <img src={post.data.thumbnail} alt={post.data.title} style={{ maxWidth: '200px' }} onError={(e) => { const target = e.target as HTMLImageElement; target.onerror = null; }} />}
           </li>
         ))}
       </ul>
